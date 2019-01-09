@@ -1,0 +1,159 @@
+<!-- jQuery -->
+<script src="js/jquery.min.js"></script>
+<script>
+    var ip = 'https://tosyngy.000webhostapp.com';
+//    if (window.localStorage.getItem('server'))
+//        ip = "http://"+window.localStorage.getItem('server')
+    myStorage = window.localStorage;
+    if (myStorage.getItem('role') !== "2")
+        $(location).attr('href', 'login.html');
+
+</script>
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> 
+<html class="no-js" style='height: 100%;'> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Task Evaluator</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="description" content="Free HTML5 Website Template by FreeHTML5.co" />
+        <meta name="keywords" content="free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
+        <meta name="author" content="FreeHTML5.co" />
+
+        <!-- Animate.css -->
+        <link rel="stylesheet" href="css/animate.css">
+        <!-- Icomoon Icon Fonts-->
+        <link rel="stylesheet" href="css/icomoon.css">
+        <!-- Bootstrap  -->         
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <!-- Flexslider  -->
+        <link rel="stylesheet" href="css/flexslider.css">
+        <!-- Theme style  -->
+        <link rel="stylesheet" href="js/jqueryUI/jquery-ui.css">
+        <link rel="stylesheet" href="css/style.css">
+        <!-- Modernizr JS -->
+        <script src="js/modernizr-2.6.2.min.js"></script>
+        <script src="js/jqueryUI/jquery-ui.js"></script>
+        <script src='bootstrap/js/bootstrap.js'></script>
+        <link href="bootstrap-fileinput-master/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+        <script src="bootstrap-fileinput-master/js/fileinput.js" type="text/javascript"></script>
+
+        <!-- FOR IE9 below -->
+        <!--[if lt IE 9]>
+        <script src="js/respond.min.js"></script>
+        <![endif]-->
+
+        <link rel="shortcut icon" href="images/loc.png">
+    </head>
+    <body style="background: url('images/bg.jpg') center 0 no-repeat ;width: 100%;height: auto;background-size: 100% 100%;">
+        <div style="margin: auto; vertical-align: 20%; text-align: center; color: #fff;margin-top: 50%;">
+            <h1 style="color: #fff">
+                You are here
+            </h1>
+            <div class="col-sm-12">
+                <a href="#" class="btn-lg btn-link btn-success" id="assignment">Give Task</a>
+            </div>
+            <div class="clearfix" style="height: 30px"></div>
+            <div  class="col-sm-12">
+                <a href="lecturerass.html" class="btn-lg btn-link btn-success">View Tasks</a>
+            </div>
+        </div>
+        <a  class="btn-sm btn-link btn-primary" href="index.html" id="logout">logout</a>
+        <div id="dialog"  title="Give Task">
+            <div class="pricing">
+                <div class="col-md-8 col-md-push-1 col-sm-12 col-sm-push-0 col-xs-12 col-xs-push-0">
+
+                    <div class="row" style="    padding: 20% 5px;">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Title" required="true" type="text" id="name" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Deadline" required="true" type="datetime-local" id="deadline" />
+                            </div>
+                        </div>
+                        <form id="formimage" action="ExamServer/uploads/uploads.php" method="post" enctype="multipart/form-data">
+                            <div class="col-md-6">
+                                <div class="file-loading">
+                                    <input id="file-1" name="file_data" class="file" type="file" data-max-file-count="1" data-show-upload="true" />
+
+
+                                </div>
+                            </div>
+                            <input name="file_name" id="filename" type="hidden"/>
+                            <input type="submit" value="Upload Image" name="submit" id="imageupload" style="display: none">
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <script>
+    var numRand = Math.floor(Math.random() * 9999999)
+//            $(document).on('click', '.kv-file-upload', function (e) {
+//                $("#filename").val(numRand)
+//                $('#imageupload').trigger('click');
+//                // e.preventDefault();
+//            })
+
+    $(function () {
+        $("#formimage").attr("action", ip + "/ExamServer/uploads/upload2.php")
+
+        $("#assignment").click(function (e) {
+            e.preventDefault();
+            // var ip = 'http://192.168.1.206s';
+            $("#dialog").dialog({
+                resizable: false,
+                height: "auto",
+                width: 400,
+                modal: true,
+                buttons: {
+                    "Done": function () {
+                        $.post(ip + '/ExamServer/assignment.php', {
+                            userid: window.localStorage.getItem('id'),
+                            deadline: $('#deadline').val(),
+                            pix: numRand,
+                            title: $("#name").val()
+                        }, function (data) {
+                            if (data === 'successful') {
+                                $("#filename").val(numRand);
+                                $('.kv-file-upload').trigger('click');
+                                $('#imageupload').trigger('click');
+                                alert('Assessment Saved Successful');
+                                $(this).dialog("close");
+                            } else
+                                alert('An Error Occur, Try again')
+                        })
+                    },
+                    "Close": function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+        })
+
+        $("#logout").click(function (e) {
+            e.preventDefault();
+            localStorage.removeItem('userid');
+            localStorage.removeItem('id');
+            localStorage.removeItem('name');
+            localStorage.removeItem('role');
+            localStorage.removeItem('mobile');
+            $(location).attr("href", "index.html")
+        })
+    })
+
+
+        </script>
+
+    </body>
+</html>
+

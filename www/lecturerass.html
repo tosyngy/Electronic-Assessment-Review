@@ -1,0 +1,323 @@
+<!-- jQuery -->
+<script src="js/jquery.min.js"></script>
+<script>
+    var ip = 'https://tosyngy.000webhostapp.com';
+//    if (window.localStorage.getItem('server'))
+//        ip = "http://"+window.localStorage.getItem('server')
+    myStorage = window.localStorage;
+    if (myStorage.getItem('role') !== "2")
+        $(location).attr('href', 'login.html');
+
+//var ip = "192.168.1.206"
+</script>
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Task Evaluator</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="description" content="Free HTML5 Website Template by FreeHTML5.co" />
+        <meta name="keywords" content="free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
+        <meta name="author" content="FreeHTML5.co" />
+
+        <!-- 
+              //////////////////////////////////////////////////////
+      
+              FREE HTML5 TEMPLATE 
+              DESIGNED & DEVELOPED by FreeHTML5.co
+                      
+              Website: 		http://freehtml5.co/
+              Email: 			info@freehtml5.co
+              Twitter: 		http://twitter.com/fh5co
+              Facebook: 		https://www.facebook.com/fh5co
+      
+              //////////////////////////////////////////////////////
+        -->
+
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <link rel="shortcut icon" href="images/loc.png">
+
+        <!-- <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,400italic,700' rel='stylesheet' type='text/css'> -->
+
+        <!-- Animate.css -->
+        <link rel="stylesheet" href="css/animate.css">
+        <!-- Icomoon Icon Fonts-->
+        <link rel="stylesheet" href="css/icomoon.css">
+        <!-- Bootstrap  -->         <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <!-- Flexslider  -->
+        <link rel="stylesheet" href="css/flexslider.css">
+        <!-- Theme style  -->
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="js/jqueryUI/jquery-ui.css">
+        <!-- Modernizr JS -->
+        <script src="js/modernizr-2.6.2.min.js"></script>
+        <script src='bootstrap/js/bootstrap.js'></script>
+        <link href="bootstrap-fileinput-master/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+        <script src="bootstrap-fileinput-master/js/fileinput.js" type="text/javascript"></script>
+        <!-- FOR IE9 below -->
+        <!--[if lt IE 9]>
+        <script src="js/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+    <body>
+
+
+        <div id="fh5co-page" style="height: 100%">
+            <div class="fh5co-contact animate-box">
+                <div class="container">
+                    <div class="row" >
+                        <div class="col-md-12" style="background: #000;padding:5px 0;margin-bottom: 10px">
+                            <h5 style="float: right;vertical-align: baseline;padding: 20px"><a href="lecturer.html">Close</a></h5>
+                            <h3 style="color: #fff">Task Evaluator</h3>
+                        </div>
+                        <div class="col-md-6 col-md-offset-3 text-center fh5co-heading animate-box">
+                            <p>Task List</p>
+                            <div class="col-xs-12">
+                                <div class="input-group">
+                                    <select class="form-control" placeholder="Assignmen" id="keyword" style="border-width: thin;height: 40px"> </select>
+                                    <select id="image" style="display: none"> </select>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" id="search" type="button" style="border: solid thin #888;height: 40px; border-radius:0 5px 5px 0">
+                                            <p><a id="imageid" target="__blank" class="download"><i class="glyphicon glyphicon-eye-open text-warning"></i></a></p>
+                                        </button>
+                                    </span>
+                                </div><!-- /input-group -->
+
+                            </div>
+                        </div>
+                        <div class="col-md-8 col-md-push-1 col-sm-12 col-sm-push-0 col-xs-12 col-xs-push-0">
+                            <form action="" method="post">
+                                <div class="row" style="    padding: 10px 5px;">
+                                    <div id="main-content" style="margin-top: 50px;text-align: center">           
+                                        <table class="table-responsive  table-hover  " style="margin: auto">
+                                            <thead>
+                                                <tr class="active" style="padding: 10px;font-size: 16px">
+                                                    <th class="col-xs-2" scope="row">S.N</th>
+                                                    <th class="col-xs-4">Ass Name</th>
+                                                    <th class="col-xs-2">Deadline</th>
+                                                    <th class="col-xs-2">View</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbody">
+                                                <tr>
+                                                    <td ></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th class="col-xs-2" scope="row">S.N</th>
+                                                    <th class="col-xs-4">Ass Name</th>
+                                                    <th class="col-xs-2">Deadline</th>
+                                                    <th class="col-xs-2">View</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+
+                                    </div> 
+
+
+                                    <!--                                    <div class="col-md-12 text-center">
+                                                                            <div class="form-group">
+                                                                                <input value="Login" class="btn btn-sm btn-default" style="border-radius: 5px;width: 30%" id="submit" type="submit">
+                                                                                <h5 style="text-align: center;vertical-align: baseline;padding: 20px">You can <a href="register.html">Sign Up</a> from here</h5>
+                                                                            </div>
+                                    
+                                                                        </div>-->
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>	
+            </div>
+
+            <div id="dialog"  title="Dr. Profile name">
+                <div class="pricing">
+                    <div class="col-md-3">
+                        <img onerror="this.src='images/ask-sym.png'" class="img-responsive profilepix" style="width: 100px;background: #fff;height: 100px;border-radius: 50%;margin-top: 20px;z-index: 100">
+                    </div>
+                </div>
+            </div>
+            <footer id="fh5co-footer" role="contentinfo" style="position: relative;bottom: 0;">
+
+                <div class="container"  style="text-align: center">
+
+                    &copy; 2018 Task Evaluator System. All Rights Reserved. 
+
+                </div>
+            </footer>
+        </div>
+
+
+
+    </body>
+    <style>
+        .js-fh5co-nav-toggle.fh5co-nav-toggle{
+            display: none;
+        }
+        #fh5co-offcanvas {
+            display: none !important;
+        }
+        .modal-backdrop.fade.in{
+            z-index: 1 !important;
+        }
+
+    </style>
+
+    <!-- jQuery Easing -->
+    <script src="js/jquery.easing.1.3.js"></script>
+    <!-- Bootstrap -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Waypoints -->
+    <script src="js/jquery.waypoints.min.js"></script>
+    <!-- Flexslider -->
+    <script src="js/jquery.flexslider-min.js"></script>
+    <script src="js/jqueryUI/jquery-ui.js"></script>
+
+    <!-- MAIN JS -->
+    <script src="js/main.js"></script>
+    <!--    <script>
+            $.getJSON("http://api.ipify.org/?format=json", function(e) {
+                alert(e.ip);
+            });     
+        </script>-->
+
+    <script type="text/javascript">
+    //   var ip = 'http://192.168.1.206';
+//    var ip = 'https://tosyngy.000webhostapp.com';
+    $(function () {
+
+        $.get(ip + "/ExamServer/assignmentdata.php", {id: window.localStorage.getItem('id')},
+                function (data) {
+                    var record = JSON.parse(data);
+                    var template = "<option>Task List</option>";
+                    var template2 = "<option></option>";
+                    $.each(record, function (id, item) {
+                        template += "<option value='" + item.id + "'>" + item.title + "</option>"
+                        template2 += "<option value='" + item.pix + ".pdf'>" + item.id + "</option>"
+                    })
+                    $("#keyword").append(template)
+                    $("#image").append(template2)
+                })
+
+        $(document).on("change", "#keyword", function () {
+            var pix = $(this)[0].selectedIndex;
+            $("#image")[0].selectedIndex = pix;
+            $("#imageid").attr("href", ip + "/ExamServer/uploads/" + $("#image").val())
+            getContent($("#image option:selected").text())
+        })
+
+        $(document).on("click", ".myModal", function () {
+            var tag = $(this).attr("data");
+            $("#" + tag).modal("show")
+        })
+        function getContent(id) {
+            $.get(ip + "/ExamServer/submissiondata.php", {id: window.localStorage.getItem('id'), assid: id},
+            function (data) {
+                var record = JSON.parse(data);
+                var template = "<tbody id='tbody'>";
+                $.each(record, function (id, item) {
+                    template += "<tr><td>" + (id + 1) + "</td>"
+                    template += "<td>" + item.title + "</td>"
+                    template += "<td>" + item.deadline + "</td>"
+                    template += "<td> <i class = 'file-edit-indicator shower glyphicon glyphicon-file text-warning myModal'   title='View Information' data-toggle= 'modal' data='myModal" + item.id + "'> </i>"
+                    template += "<div class='modal fade' id='myModal" + item.id + "' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>";
+                    template += "<div class='modal-dialog'>";
+                    template += "<div class='modal-content'>";
+                    template += "<div class='modal-header'>";
+                    template += "<button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
+                    template += "<h4 class='modal-title'>" + item.title + " from " + item.name + "</h4>";
+                    template += "</div>";
+                    template += "<div class='modal-body'>";
+                    template += "<div id='tab-container' class='tab-container'>";
+                    template += "<div class='pricing'>";
+                    template += " <div class='col-md-8 col-md-push-1 col-sm-12 col-sm-push-0 col-xs-12 col-xs-push-0'>";
+                    template += "<div class='row' style=' padding: 20% 5px;'>";
+                    template += " <div class='col-md-6'>";
+                    template += " <div class='form-group'>";
+                    template += "<label class='form-control' placeholder='Username' required='true' type='text' id='matric'>" + localStorage.getItem('userid') + "</label>";
+                    template += " </div>";
+                    template += " </div>";
+                    template += "<div class='col-md-6'>";
+                    template += " <div class='form-group'>";
+                    template += "   <label class='form-control' placeholder='Name' required='true'  type='datetime-local' id='name'>" + localStorage.getItem('name') + "</label>";
+                    template += " </div>";
+                    template += "  </div>";
+
+                    template += " <form id='formimage' action='" + ip + "/ExamServer/uploads/upload2.php' method='post' enctype='multipart/form-data'>";
+                    template += "<div class='col-md-6'>";
+                    template += "<span class = 'input-group-btn' >";
+                    template += "<button class = 'btn btn-default' id = 'search' type = 'button' style = 'border: solid thin #888;height: 40px; border-radius:0 5px 5px 0' >";
+                    template += "<p> Attached Document: <a id = 'imageid' href='" + ip + "/ExamServer/uploads/" + item.ref + ".pdf' target='__blank' class = 'download'> <i class = 'glyphicon glyphicon-eye-open text-warning'> </i></a> </p>";
+                    template += "</button>";
+                    template += "</span><hr/>";
+//                    template += "<input id='file-1" + item.id + "' name='file_data' class='file' type='file' data-max-file-count='1' data-show-upload='true' />";
+//                    var imagename = new Date().getTime();
+//                    template += " </div>";
+//                    template += " <input id='filename' name='file_name' value='" + imagename + "' type='hidden' />";
+//
+//                    template += " <input type='submit' value='Upload Image' name='submit' id='imageupload' style='display: none'>";
+//                    template += "</form>";
+                    template += " </div>";
+
+                    template += " </div>";
+                    template += " </div>";
+                    template += "  </div>";
+                    template += " </div>";
+                    template += " <div class='modal-footer' >";
+                    template += " <button type='button' class='btn btn-default' data-dismiss='modal'>Cancel</button>";
+//                    template += " <button type='button' id='submitAss' class='btn btn-warning'  value=''>Submit</button>";
+                    template += "  </div>";
+                    template += " </div>";
+                    template += "</div>";
+                    template += " </div></td ></tr>";
+                })
+                template += "</tbody>";
+                $("#tbody").replaceWith(template);
+            })
+
+        }
+
+
+    })
+
+
+    </script>
+    <style>
+        table, td, th {
+            border: 1px solid #337ab7;
+        }
+        th {
+            text-align: left;
+        }
+        th {
+            background-color: #337ab7;
+            color: white;
+        }
+        td {
+            padding: 2px;
+        }
+
+        tr:hover + td {
+            color: #eee;
+        }
+    </style>
+    <script src="js/jTable.js"></script>
+
+
+
+
+</html>
+
